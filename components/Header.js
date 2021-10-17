@@ -21,7 +21,7 @@ function Header() {
         <div className="flex justify-between max-w-6xl mx-5 lg:mx-auto">
             {/* Left */}
             <div className="relative h-12 w-20 cursor-pointer mt-2 bg-indigo-100 rounded-full">
-                    <Image src={Logo} layout="fill"  objectFit="contain" />
+                   {<Image src={Logo} layout="fill"  objectFit="contain" />} 
 
             </div>  
 
