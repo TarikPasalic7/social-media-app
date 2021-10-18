@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Feed from '../components/Feed';
 import Header from '../components/Header';
 const prefix = process.env. NEXT_PUBLIC_BASE_PATH || '';
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
 <Header/>
 
 {/* Feed*/}
+<Feed/>
 {/* Modal */}
     </div>
   )
