@@ -1,5 +1,7 @@
 import Stories from "./Stories"
 import Posts from "./Posts"
+import Profile from "./Profile"
+import Suggestions from "./Suggestions"
 
 
 function Feed() {
@@ -15,10 +17,16 @@ function Feed() {
 
                </section>
         {/* Section Right */}
-        <section>
+        <section className="hidden xl:inline-grid col-span-1">
               {/* Profile */}
+              <div className="fixed top-20" >
+              <Profile/>
                 
-               {/* Suggestions */}
+                {/* Suggestions */}
+                <Suggestions/>
+
+              </div>
+             
                </section>
         </main>
     )
