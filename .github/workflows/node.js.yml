@@ -34,7 +34,7 @@ jobs:
         NEXT_PUBLIC_GOOGLE_CLIENT_SECRET : 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
         NEXT_PUBLIC_NEXTAUTH_URL : https://github.com/TarikPasalic7/social-media-app
   
-    - run: touch ./out/.nojekyll
+
     
  
     - name: Deploy 🚀
