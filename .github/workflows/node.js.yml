@@ -40,9 +40,9 @@ jobs:
     - run: npm run export
       env:
         NEXT_PUBLIC_BASE_PATH: /social-media-app
-        GOOGLE_CLIENT_ID : 511520526419-situbspaa4tcaks3qbcotmf5qvt4gb35.apps.googleusercontent.com
-        GOOGLE_CLIENT_SECRET : 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
-        NEXTAUTH_URL : https://github.com/TarikPasalic7/social-media-app
+        NEXT_PUBLIC_GOOGLE_CLIENT_ID : 511520526419-situbspaa4tcaks3qbcotmf5qvt4gb35.apps.googleusercontent.com
+        NEXT_PUBLIC_GOOGLE_CLIENT_SECRET : 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
+        NEXT_PUBLIC_NEXTAUTH_URL : https://github.com/TarikPasalic7/social-media-app
     - run: touch ./out/.nojekyll
     
  
