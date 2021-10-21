@@ -1,33 +1,24 @@
-on:
-  release:
-    types:
-      - published
-  push:
-    branches:
-      - dev
-  workflow_dispatch:
-
+name: deploy website
+on: [push]
 jobs:
-  vercel: 
+  deploy:
     runs-on: ubuntu-latest
-    name: "Deploy front-end"
-    
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - name: Use Node.js
+        uses: actions/setup-node@v1
         with:
-          node-version: '14'
-          registry-url: https://registry.npmjs.org/
-
-      - name: "Deploy to Vercel"
-        run: |
-          prodRun=""
-          if [[ ${GITHUB_REF} == "refs/heads/main" ]]; then
-            prodRun="--prod"
-          fi
-
-          npx vercel --token ${VERCEL_TOKEN} $prodRun
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          node-version: "14.x"
+      - name: Install dependencies
+        run: npm ci
+      - uses: actions/vercel-deployment@0.5.1
+        with:
+          vercelToken: ${{ secrets.VERCEL_TOKEN }}
+          vercelOrgId: ${{ secrets.VERCEL_ORG_ID }}
+          vercelProjectId: ${{ secrets.VERCEL_PROJECT_ID }}
+          githubToken: ${{ secrets.PAT }}
+          sourceDirectory: "src"
+          assignDomain: https://social-media-app.vercel.app/
+      
+          
+        
