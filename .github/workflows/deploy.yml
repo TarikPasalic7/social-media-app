@@ -7,21 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       #add env file to .env.local
-      
         
-        
-           #add env file to .env.local
-      - name: Set Env Vars on Vercel Project
-        uses: dkershner6/vercel-set-env-action@v1
-        with:
-          token: ${{ secrets.VERCEL_TOKEN }}
-          projectName: social-media-app
-          
-          
-        
-      
-          
-      
           
       
 
