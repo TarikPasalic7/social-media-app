@@ -18,7 +18,9 @@ import {
 
 function Post({id,username,userImg,img,caption}) {
     return (
-        <div className="bg-white my-8 border rounded-sm">
+    
+        <div className="bg-white my-8 border rounded-sm">  
+          <h1>POOOST</h1>
            {/** Header */}
            <div className="flex items-center p-5">
                <img src={userImg} className="rounded-full h-12 w-12 object-contain
