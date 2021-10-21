@@ -1,5 +1,5 @@
 import Logo from '../public/snoopy-logo.png'
-import Image from 'next/image'
+//import Image from 'next/image'
 import {
   SearchIcon,
   PlusCircleIcon,
