@@ -1,13 +1,11 @@
-name: "Deploy"
-
-
 on:
+  release:
+    types:
+      - published
   push:
     branches:
       - master
-  pull_request:
-    branches:
-      - master
+  workflow_dispatch:
 
 jobs:
   vercel: 
@@ -33,4 +31,3 @@ jobs:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          
