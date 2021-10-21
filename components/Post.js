@@ -18,7 +18,7 @@ function Post ({ id, username, userImg, img, caption }) {
     <div className='bg-white my-8 border rounded-sm'>
 
       {/** Header */}
-      <h1>Api</h1>
+      
       <div className='flex items-center p-5'>
         <img
           src={userImg} className='rounded-full h-12 w-12 object-contain
