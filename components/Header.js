@@ -1,4 +1,4 @@
-import Logo from '../public/snoopy-logo.png'
+
 const prefix = process.env.NEXT_PUBLIC_BASE_PATH || ''
 //import Image from 'next/image'
 import {
@@ -15,14 +15,16 @@ import {
 
 } from '@heroicons/react/solid'
 import { signIn, signOut, useSession } from 'next-auth/react'
+import { useRouter } from 'next/router';
 function Header () {
 const {data: session} = useSession();
+const router = useRouter();
 
   return (
     <div className='shadow-sm border-b sticky top-0 z-50 bg-blue-400'>
       <div className='flex justify-between max-w-6xl mx-5 lg:mx-auto'>
         {/* Left */}
-        <div className='relative h-12 w-20 cursor-pointer mt-2 bg-indigo-100 rounded-full'>
+        <div onClick={()=>router.push('/')} className='relative h-12 w-20 cursor-pointer mt-2 bg-indigo-100 rounded-full'>
           <img className="h-8 w-8 ml-6 mt-2"  src={prefix + '/snoopy-logo.png'} layout='fill' objectfit='contain' />
 
         </div>
@@ -44,7 +46,7 @@ const {data: session} = useSession();
 
         {/* Right */}
         <div className='flex items-center justify-end space-x-4'>
-          <HomeIcon className='navBtn' />
+          <HomeIcon onClick={()=>router.push('/')} className='navBtn' />
           <MenuIcon className='h-6 md:hidden' />
 
           {session? ( <>     <div className='relative navBtn'>
