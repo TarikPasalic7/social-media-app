@@ -1,15 +1,25 @@
-import { getProviders, signIn } from 'next-auth/react'
+import { getProviders, signIn,SignIntoProvider,} from 'next-auth/react'
+import Logo from '../../public/snoopy-logo.png';
+import Header from '../../components/Header'
+const prefix = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 export default function SignIn ({ providers }) {
   return (
     <>
-      {Object.values(providers).map((provider) => (
+    <Header/>
+    <div className="flex flex-col items-center justify-center min-h-screen 
+    py-2 -mt-56 px-14 text-center ">
+        <img className="w-50  h-40" src={prefix+ "/snoopy-logo.png"} />
+        <p className="font-xs italic mt-5">  This is a social media app</p>
+
+    <div className="mt-40" >{Object.values(providers).map((provider) => (
         <div key={provider.name}>
-          <button onClick={() => signIn(provider.id)}>
+          <button className="p-3  rounded-lg text-white bg-purple-600" onClick={() =>signIn(provider.id, {callbackUrl: '/'})}>
             Sign in with {provider.name}
           </button>
         </div>
-      ))}
+      ))}</div>
+      </div>
     </>
   )
 }
