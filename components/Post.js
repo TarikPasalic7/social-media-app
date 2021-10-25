@@ -1,5 +1,5 @@
 import {useState,useEffect} from 'react'
-import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp } from '@firebase/firestore';
+import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp, setDoc,doc, deleteDoc } from '@firebase/firestore';
 import {
   
   HeartIcon,
@@ -21,9 +21,26 @@ function Post ({ id, username, userImg, img, caption }) {
 const {data:session} =useSession();
 const [comments, setComments] = useState([])
 const [comment, setComment] = useState("")
+const [likes, setLikes] = useState([])
+const [hasLiked, setHasLiked] = useState(false)
 
 useEffect(() => onSnapshot(query(collection(db,'posts',id,'comments'),orderBy('timestamp','desc')),
-snapshot =>setComments(snapshot.docs) ), [db])
+snapshot =>setComments(snapshot.docs) ), [db,id])
+
+useEffect(
+  () =>
+   onSnapshot(collection(db,'posts',id,'likes'),(snapshot)=> 
+   setLikes(snapshot.docs)
+),
+ [db,id]
+ );
+
+
+  useEffect(() => 
+   setHasLiked(
+    likes.findIndex((like) => like.id===session?.user?.uid) !== -1 
+    ),
+     [likes])
 
 const addComment = async(e)=>{
   e.preventDefault();
@@ -38,6 +55,22 @@ const addComment = async(e)=>{
 
 
   })
+}
+
+
+const likePost = async () =>{
+  
+if(hasLiked){
+await deleteDoc(doc(db,'posts',id,'likes',session.user.uid))
+}
+else{
+  await setDoc(doc(db,'posts',id,'likes',session.user.uid),{
+    username:session.user.username,
+ 
+   })
+   console.log("click");
+}
+ 
 }
 
 
@@ -65,7 +98,7 @@ const addComment = async(e)=>{
       {
         session && ( <div className='flex justify-between px-4 py-4'>
         <div className='flex space-x-4'>
-          <HeartIcon className='btns' />
+          <HeartIcon onClick={likePost} className='btns' />
           <ChatIcon className='btns' />
           <PaperAirplaneIcon className='btns' />
         </div>
