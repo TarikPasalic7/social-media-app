@@ -1,3 +1,5 @@
+import {useState,useEffect} from 'react'
+import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp } from '@firebase/firestore';
 import {
   
   HeartIcon,
@@ -11,8 +13,34 @@ import {
 } from '@heroicons/react/outline'
 import { HeartIcon as HeartIconFilled } from
   '@heroicons/react/solid'
+import { useSession } from 'next-auth/react'
+import { db } from '../firebase';
+import Moment from 'react-moment';
 
 function Post ({ id, username, userImg, img, caption }) {
+const {data:session} =useSession();
+const [comments, setComments] = useState([])
+const [comment, setComment] = useState("")
+
+useEffect(() => onSnapshot(query(collection(db,'posts',id,'comments'),orderBy('timestamp','desc')),
+snapshot =>setComments(snapshot.docs) ), [db])
+
+const addComment = async(e)=>{
+  e.preventDefault();
+  const commentToSend = comment;
+  setComment('');
+
+  await addDoc(collection(db,'posts',id,'comments'),{
+    comment: commentToSend,
+    username:session.user.username,
+    userImage: session.user.image,
+    timestamp:serverTimestamp()
+
+
+  })
+}
+
+
   return (
 
     <div className='bg-white my-8 border rounded-sm'>
@@ -33,14 +61,18 @@ function Post ({ id, username, userImg, img, caption }) {
       <img className='object-cover w-full ' alt='post img' src={img} />
 
       {/** Buttons */}
-      <div className='flex justify-between px-4 py-4'>
+
+      {
+        session && ( <div className='flex justify-between px-4 py-4'>
         <div className='flex space-x-4'>
           <HeartIcon className='btns' />
           <ChatIcon className='btns' />
           <PaperAirplaneIcon className='btns' />
         </div>
         <BookmarkIcon className='btns' />
-      </div>
+      </div>)
+      }
+    
 
       {/** Caption */}
       <div>
@@ -53,16 +85,45 @@ function Post ({ id, username, userImg, img, caption }) {
       </div>
       {/** Comments **/}
 
+{comments.length >0 && (
+
+  <div className='ml-10 h-20 overflow-y-scroll scrollbar-thumb-black scrollbar-thin'>
+{
+
+  comments.map(comment=>(<div key={comment.id} className="flex items-center space-x-2 mb-3">
+
+<img  className="h-7 rounded-full" src={comment.data().userImage} alt="" />
+
+<p className="text-sm flex-1"><span className="font-bold">{comment.data().username}</span> {" "} {comment.data().comment}</p>
+<Moment fromNow className="pr-5 text-xs">{comment.data().timestamp?.toDate()} </Moment>
+  </div>))
+}
+
+
+  </div>
+
+)}
+
+
+
+
+
       {/** Input box **/}
-      <form className='flex items-center p-4'>
+  {
+    session && (   <form className='flex items-center p-4'>
         <EmojiHappyIcon className='h-6' />
         <input
           type='text'
+          value={comment}
+          onChange={e=>setComment(e.target.value)}
           placeholder='Add a comment...'
           className='border-none flex-1 focus:ring-0 outline-none'
         />
-        <button className='font-semibold text-yellow-600'>Post</button>
-      </form>
+        <button type='submit' disabled={!comment.trim()} onClick={addComment} className='font-semibold text-yellow-600'>Post</button>
+      </form>)
+  }
+
+   
 
     </div>
   )
