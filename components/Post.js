@@ -1,5 +1,5 @@
 import {useState,useEffect} from 'react'
-import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp, setDoc,doc, deleteDoc } from '@firebase/firestore';
+import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp, setDoc,doc, deleteDoc,toDate } from '@firebase/firestore';
 import {
   
   HeartIcon,
@@ -16,6 +16,7 @@ import { HeartIcon as HeartIconFilled } from
 import { useSession } from 'next-auth/react'
 import { db } from '../firebase';
 import Moment from 'react-moment';
+import 'moment-timezone';
 
 function Post ({ id, username, userImg, img, caption }) {
 const {data:session} =useSession();
@@ -68,7 +69,7 @@ else{
     username:session.user.username,
  
    })
-   console.log("click");
+ 
 }
  
 }
@@ -98,7 +99,8 @@ else{
       {
         session && ( <div className='flex justify-between px-4 py-4'>
         <div className='flex space-x-4'>
-          <HeartIcon onClick={likePost} className='btns' />
+          {hasLiked?(<HeartIconFilled onClick={likePost} className="btns text-red-600"/>):(<HeartIcon onClick={likePost} className='btns' />)}
+          
           <ChatIcon className='btns' />
           <PaperAirplaneIcon className='btns' />
         </div>
@@ -109,7 +111,8 @@ else{
 
       {/** Caption */}
       <div>
-        <p className='P-5 truncate'>
+        <p className='p-5 truncate'>
+          {likes.length>0 && (<p className="font-bold mb-1" >{likes.length} likes</p>)}
           <span className='font-bold mr-1'>{username} </span>
           {caption}
 
@@ -128,7 +131,10 @@ else{
 <img  className="h-7 rounded-full" src={comment.data().userImage} alt="" />
 
 <p className="text-sm flex-1"><span className="font-bold">{comment.data().username}</span> {" "} {comment.data().comment}</p>
-<Moment fromNow className="pr-5 text-xs">{comment.data().timestamp?.toDate()} </Moment>
+<Moment fromNow className="pr-5 text-xs">{ comment.data().timestamp?.toDate().toString()  } 
+</Moment>
+
+
   </div>))
 }
 
