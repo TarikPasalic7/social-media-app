@@ -15,7 +15,8 @@ function Modal() {
      const filePicker = useRef(null);
      const captionRef = useRef(null)
      const [selectedFile, setSelectedFile] = useState(null);
-     const [loading, setLoading] = useState(false)
+     const [loading, setLoading] = useState(false);
+    
        const {data:session}= useSession();
      const addImageToPost = (e) =>{
          const reader = new FileReader();
@@ -29,9 +30,11 @@ function Modal() {
      };
 
 
-    const uploadPost = async () =>{
-
+    const uploadPost = async (e) =>{
+       
         if(loading)
+        return;
+        if(selectedFile===null)
         return;
         setLoading(true);
 
@@ -88,7 +91,7 @@ function Modal() {
 
                             <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left
                  overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
-                             <div>
+                             <form>
                                  {selectedFile?( <img src={selectedFile} alt="uploaded post" onClick={()=>setSelectedFile(null)}/> ):(<div  onClick={()=>filePicker.current.click()}
                                  className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 cursor-pointer">
 
@@ -110,6 +113,7 @@ function Modal() {
                                      type="file"
                                      hidden
                                      onChange={addImageToPost}
+                                     required
                                      
                                      
                                      />
@@ -118,8 +122,8 @@ function Modal() {
                                  </div>
                                  <div>
                                 <input className="border-none focus:ring-0 w-full text-center"
-                                type="text" ref={captionRef} placeholder="Please enter a caption" />
-
+                                type="text" ref={captionRef} placeholder="Please enter a caption" required />
+                                         
                                  </div>
 
                            <div className="mt-5 sm:mt-6">
@@ -133,11 +137,11 @@ function Modal() {
                               {loading? "Uploading ...":"Upload Post"}
 
                                </button>
-
+                               
 
                            </div>
 
-                             </div>
+                             </form>
                             </div>
 
                         </Transition.Child>
