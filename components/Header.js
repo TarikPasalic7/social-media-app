@@ -28,8 +28,8 @@ const [open,setOpen]=useRecoilState(modalState);
     <div className='shadow-sm border-b sticky top-0 z-50 bg-blue-400'>
       <div className='flex justify-between max-w-6xl mx-5 lg:mx-auto'>
         {/* Left */}
-        <div onClick={()=>router.push('/')} className='relative h-12 w-20 cursor-pointer mt-2 bg-indigo-100 rounded-full'>
-          <img className="h-8 w-8 ml-6 mt-2"  src={prefix + '/snoopy-logo.png'} layout='fill' objectfit='contain' />
+        <div onClick={()=>router.push('/')} className='relative h-12 w-12 cursor-pointer mt-2 bg-indigo-100 rounded-full'>
+          <img className="h-8 w-8 ml-2 mt-2 "  src={prefix + '/snoopy-lg.png'} layout='fill' objectfit='contain' />
 
         </div>
 
