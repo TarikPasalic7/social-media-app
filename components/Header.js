@@ -28,8 +28,8 @@ const [open,setOpen]=useRecoilState(modalState);
     <div className='shadow-sm border-b sticky top-0 z-50 bg-blue-400'>
       <div className='flex justify-between max-w-6xl mx-5 lg:mx-auto'>
         {/* Left */}
-        <div onClick={()=>router.push('/')} className='relative h-12 w-12 cursor-pointer mt-2 bg-indigo-100 rounded-full'>
-          <img className="h-8 w-8 ml-2 mt-2 "  src={prefix + '/snoopy-lg.png'} layout='fill' objectfit='contain' />
+        <div onClick={()=>router.push('/')} className='relative  cursor-pointer md:mt-2 mt-4 md:h-12  w-12 h-2/3  rounded-full bg-indigo-100'>
+          <img className=" p-1"  src={prefix + '/snoopy-lg.png'} layout='fill' objectfit='contain' />
 
         </div>
 
@@ -70,7 +70,7 @@ const [open,setOpen]=useRecoilState(modalState);
             alt='Profile picture' className='h-10 rounded-full cursor-pointer'
           /> </>    ):(
 
-            <button onClick={signIn}>Sign In</button>
+            <button className=" whitespace-nowrap" onClick={signIn}>Sign In</button>
           )
             
   }
