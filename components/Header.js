@@ -7,7 +7,8 @@ import {
   UserGroupIcon,
   HeartIcon,
   PaperAirplaneIcon,
-  MenuIcon
+ PlusSmIcon
+ 
 
 } from '@heroicons/react/outline'
 import {
@@ -51,9 +52,10 @@ const [open,setOpen]=useRecoilState(modalState);
         {/* Right */}
         <div className='flex items-center justify-end space-x-4'>
           <HomeIcon onClick={()=>router.push('/')} className='navBtn' />
-          <MenuIcon className='h-6 md:hidden' />
+        
+        
 
-          {session? ( <>     <div className='relative navBtn'>
+          {session? ( <>      <div className='relative navBtn'>
             <PaperAirplaneIcon className='navBtn rotate-45' />
             <div className='absolute -top-1 -right-2 text-xs w-5
                 h-5 flex items-center justify-center bg-red-500 rounded-full animate-pulse text-white'
@@ -61,7 +63,8 @@ const [open,setOpen]=useRecoilState(modalState);
             </div>
           </div>
           <PlusCircleIcon onClick={()=>setOpen(true)} className='navBtn' />
-
+          <PlusCircleIcon onClick={()=>setOpen(true)} className='  w-14  hover:scale-125  cursor-pointer 
+        transition-all duration-150 ease-out md:hidden ' />
           <UserGroupIcon className='navBtn' />
           <HeartIcon className='navBtn' />
           <img
