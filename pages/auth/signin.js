@@ -1,5 +1,5 @@
-import { getProviders, signIn,SignIntoProvider,} from 'next-auth/react'
-import Logo from '../../public/snoopy-lg.png';
+import { getProviders, signIn} from 'next-auth/react'
+
 import Header from '../../components/Header'
 const prefix = process.env.NEXT_PUBLIC_BASE_PATH || ''
 

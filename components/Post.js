@@ -75,10 +75,7 @@ else{
  
 }
 
-const deletePost = async () =>{
 
-  await deleteDoc(doc(db,'posts',id));
-}
 
 
   return (
@@ -97,7 +94,7 @@ const deletePost = async () =>{
      
          {/* ... icon */}
 
-<PostMenu/>
+<PostMenu postid={id}/>
 
 
 

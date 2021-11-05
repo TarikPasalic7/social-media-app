@@ -59,7 +59,7 @@ const [open,setOpen]=useRecoilState(modalState);
             <PaperAirplaneIcon className='navBtn rotate-45' />
             <div className='absolute -top-1 -right-2 text-xs w-5
                 h-5 flex items-center justify-center bg-red-500 rounded-full animate-pulse text-white'
-            >3
+            >2
             </div>
           </div>
           <PlusCircleIcon onClick={()=>setOpen(true)} className='navBtn' />

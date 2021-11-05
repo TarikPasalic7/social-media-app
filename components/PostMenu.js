@@ -1,12 +1,20 @@
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
-
-
+import { doc, deleteDoc } from '@firebase/firestore';
+import { db } from '../firebase';
+import { useSession } from 'next-auth/react'
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function PostMenu() {
+export default function PostMenu({postid}) {
+  const {data:session} =useSession();
+  const deletePost = async () =>{
+
+    await deleteDoc(doc(db,'posts',postid));
+  }
+  
+
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -27,62 +35,68 @@ export default function PostMenu() {
         leaveTo="transform opacity-0 scale-95"
       >
         <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none">
-          <div className="py-1">
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="#"
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm'
-                  )}
-                >
-                  Edit
-                </a>
+        {
+        session && ( <div className="py-1">
+        <Menu.Item>
+          {({ active }) => (
+            <a
+              href="#"
+              className={classNames(
+                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                'block px-4 py-2 text-sm'
               )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="#"
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm'
-                  )}
-                >
-                  Duplicate
-                </a>
+            >
+              Edit
+            </a>
+          )}
+        </Menu.Item>
+        <Menu.Item>
+          {({ active }) => (
+            <a
+              href="#"
+              className={classNames(
+                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                'block px-4 py-2 text-sm'
               )}
-            </Menu.Item>
-          </div>
-          <div className="py-1">
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="#"
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm'
-                  )}
-                >
-                  Archive
-                </a>
+            >
+              Duplicate
+            </a>
+          )}
+        </Menu.Item>
+      </div>)
+      }
+      {
+        session && ( <div className="py-1">
+        <Menu.Item>
+          {({ active }) => (
+            <a
+              href="#"
+              className={classNames(
+                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                'block px-4 py-2 text-sm'
               )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="#"
-                  className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 text-sm'
-                  )}
-                >
-                  Move
-                </a>
+            >
+              Archive
+            </a>
+          )}
+        </Menu.Item>
+        <Menu.Item>
+          {({ active }) => (
+            <a
+              href="#"
+              className={classNames(
+                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                'block px-4 py-2 text-sm'
               )}
-            </Menu.Item>
-          </div>
+            >
+              Move
+            </a>
+          )}
+        </Menu.Item>
+      </div>)
+      }
+          
+         
           <div className="py-1">
             <Menu.Item>
               {({ active }) => (
@@ -111,10 +125,12 @@ export default function PostMenu() {
               )}
             </Menu.Item>
           </div>
-          <div className="py-1">
+          {session && ( <div className="py-1">
             <Menu.Item>
               {({ active }) => (
                 <a
+                onClick={deletePost}
+                
                   href="#"
                   className={classNames(
                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
@@ -125,7 +141,8 @@ export default function PostMenu() {
                 </a>
               )}
             </Menu.Item>
-          </div>
+          </div>)}
+         
         </Menu.Items>
       </Transition>
     </Menu>
