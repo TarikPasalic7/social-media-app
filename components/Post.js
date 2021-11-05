@@ -17,6 +17,7 @@ import { useSession } from 'next-auth/react'
 import { db } from '../firebase';
 import Moment from 'react-moment';
 import 'moment-timezone';
+import PostMenu from './PostMenu';
 
 function Post ({ id, username, userImg, img, caption }) {
 const {data:session} =useSession();
@@ -74,6 +75,11 @@ else{
  
 }
 
+const deletePost = async () =>{
+
+  await deleteDoc(doc(db,'posts',id));
+}
+
 
   return (
 
@@ -86,9 +92,17 @@ else{
           src={userImg} className='rounded-full h-12 w-12 object-contain
                border p-1 mr-3' alt='post tag'
         />
-        <p className='flex-1 font-bold'>{username}</p>
-        <DotsHorizontalIcon className='h-5' /> {/* ... icon */}
+        <p className='flex-1 font-bold '>{username}</p>
+     
+     
+         {/* ... icon */}
 
+<PostMenu/>
+
+
+
+         
+ 
       </div>
       {/** img */}
 
