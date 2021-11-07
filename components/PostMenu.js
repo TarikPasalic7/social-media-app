@@ -7,7 +7,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function PostMenu({postid}) {
+export default function PostMenu({postid,username}) {
   const {data:session} =useSession();
   const deletePost = async () =>{
 
@@ -35,69 +35,12 @@ export default function PostMenu({postid}) {
         leaveTo="transform opacity-0 scale-95"
       >
         <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none">
-        {
-        session && ( <div className="py-1">
-        <Menu.Item>
-          {({ active }) => (
-            <a
-              href="#"
-              className={classNames(
-                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                'block px-4 py-2 text-sm'
-              )}
-            >
-              Edit
-            </a>
-          )}
-        </Menu.Item>
-        <Menu.Item>
-          {({ active }) => (
-            <a
-              href="#"
-              className={classNames(
-                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                'block px-4 py-2 text-sm'
-              )}
-            >
-              Duplicate
-            </a>
-          )}
-        </Menu.Item>
-      </div>)
-      }
-      {
-        session && ( <div className="py-1">
-        <Menu.Item>
-          {({ active }) => (
-            <a
-              href="#"
-              className={classNames(
-                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                'block px-4 py-2 text-sm'
-              )}
-            >
-              Archive
-            </a>
-          )}
-        </Menu.Item>
-        <Menu.Item>
-          {({ active }) => (
-            <a
-              href="#"
-              className={classNames(
-                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                'block px-4 py-2 text-sm'
-              )}
-            >
-              Move
-            </a>
-          )}
-        </Menu.Item>
-      </div>)
-      }
-          
+        
+       
          
           <div className="py-1">
+          
+
             <Menu.Item>
               {({ active }) => (
                 <a
@@ -124,8 +67,51 @@ export default function PostMenu({postid}) {
                 </a>
               )}
             </Menu.Item>
-          </div>
-          {session && ( <div className="py-1">
+           
+        {session?.user?.username===username && ( <div className="py-1">
+        <Menu.Item> 
+          {({ active }) => (
+            <a
+              href="#"
+              className={classNames(
+                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                'block px-4 py-2 text-sm'
+              )}
+            >
+              Edit
+            </a>
+          )}
+        </Menu.Item>
+
+
+            <Menu.Item>
+          {({ active }) => (
+            <a
+              href="#"
+              className={classNames(
+                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                'block px-4 py-2 text-sm'
+              )}
+            >
+              Archive
+            </a>
+          )}
+        </Menu.Item>
+        <Menu.Item>
+          {({ active }) => (
+            <a
+              href="#"
+              className={classNames(
+                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                'block px-4 py-2 text-sm'
+              )}
+            >
+              Move
+            </a>
+          )}
+        </Menu.Item>
+
+
             <Menu.Item>
               {({ active }) => (
                 <a
@@ -140,8 +126,11 @@ export default function PostMenu({postid}) {
                   Delete
                 </a>
               )}
-            </Menu.Item>
-          </div>)}
+            </Menu.Item> </div>)} 
+
+
+          </div>
+
          
         </Menu.Items>
       </Transition>

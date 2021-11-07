@@ -1,5 +1,5 @@
 import {useState,useEffect} from 'react'
-import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp, setDoc,doc, deleteDoc,toDate } from '@firebase/firestore';
+import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp, setDoc,doc, deleteDoc,getDocs,where } from '@firebase/firestore';
 import {
   
   HeartIcon,
@@ -26,8 +26,15 @@ const [comment, setComment] = useState("")
 const [likes, setLikes] = useState([])
 const [hasLiked, setHasLiked] = useState(false)
 
+
 useEffect(() => onSnapshot(query(collection(db,'posts',id,'comments'),orderBy('timestamp','desc')),
 snapshot =>setComments(snapshot.docs) ), [db,id])
+
+
+
+
+
+ 
 
 useEffect(
   () =>
@@ -83,7 +90,7 @@ else{
     <div className='bg-white my-8 border rounded-sm'>
 
       {/** Header */}
-      
+
       <div className='flex items-center p-5'>
         <img
           src={userImg} className='rounded-full h-12 w-12 object-contain
@@ -94,7 +101,7 @@ else{
      
          {/* ... icon */}
 
-<PostMenu postid={id}/>
+<PostMenu postid={id} username={username}/>
 
 
 
