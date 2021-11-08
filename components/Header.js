@@ -19,6 +19,7 @@ import { signIn, signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
 import { modalState } from '../atoms/modalAtom';
+import MainMenu from './MainMenu';
 function Header () {
 const {data: session} = useSession();
 const router = useRouter();
@@ -52,7 +53,7 @@ const [open,setOpen]=useRecoilState(modalState);
         {/* Right */}
         <div className='flex items-center justify-end space-x-4'>
           <HomeIcon onClick={()=>router.push('/')} className='navBtn' />
-        
+          
         
 
           {session? ( <>      <div className='relative navBtn'>
@@ -63,12 +64,24 @@ const [open,setOpen]=useRecoilState(modalState);
             </div>
           </div>
           <PlusCircleIcon onClick={()=>setOpen(true)} className='navBtn' />
-          <PlusCircleIcon onClick={()=>setOpen(true)} className='  w-14  hover:scale-125  cursor-pointer 
-        transition-all duration-150 ease-out md:hidden ' />
+          {/**
+           * Add a post 
+           * 
+           *   <PlusCircleIcon onClick={()=>setOpen(true)} className='navBtn' />
+           * 
+           */
+
+           
+          }
+         
+          
+        
           <UserGroupIcon className='navBtn' />
           <HeartIcon className='navBtn' />
+          <MainMenu/>
+          
           <img
-            onClick={signOut}
+            
             src={session.user.image}
             alt='Profile picture' className='h-10 rounded-full cursor-pointer'
           /> </>    ):(

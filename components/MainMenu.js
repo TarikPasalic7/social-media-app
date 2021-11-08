@@ -3,16 +3,17 @@ import { Menu, Transition } from '@headlessui/react'
 import { doc, deleteDoc } from '@firebase/firestore';
 import { db } from '../firebase';
 import { useSession } from 'next-auth/react'
+import {
+  
+    DotsVerticalIcon 
+  
+  } from '@heroicons/react/solid'
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
-import {
-  
-  DotsVerticalIcon 
 
-} from '@heroicons/react/solid'
-
-export default function PostMenu({postid,username}) {
+export default function MainMenu({postid,username}) {
   const {data:session} =useSession();
   const deletePost = async () =>{
 
@@ -23,15 +24,15 @@ export default function PostMenu({postid,username}) {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
+    
       <Menu.Button className=" font-bold text-2xl">
-        
-      <DotsVerticalIcon className=' h-6 md:inline-flex
+       
+      <DotsVerticalIcon className='h-6 
         cursor-pointer hover:scale-125
-        transition-all duration-150 ease-out'/>
-   
+        transition-all duration-150 ease-out md:hidden mt-2 text-gray-800'/>
+       
 
         </Menu.Button>
-        
     
       </div>
 
