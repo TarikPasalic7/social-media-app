@@ -154,8 +154,8 @@ else{
 
   </div>))
 }
+{session && (<Footer/>)}
 
-<Footer/>
   </div>
 
 )}

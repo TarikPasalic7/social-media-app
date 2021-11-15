@@ -11,7 +11,7 @@ export default function SignIn ({ providers }) {
     <div className="flex flex-col items-center justify-center min-h-screen 
     py-2 xl:-mt-36   px-14 text-center ">
         <img className="w-50  h-40" src={prefix+ "/snoopy-lg.png"} />
-        <p className="font-xs italic mt-5">  This is a social media app</p>
+  
 
     <div className="mt-40" >{Object.values(providers).map((provider) => (
         <div key={provider.name}>
@@ -21,7 +21,7 @@ export default function SignIn ({ providers }) {
         </div>
       ))}</div>
       </div>
-      <Footer/>
+    
     </>
   )
 }
