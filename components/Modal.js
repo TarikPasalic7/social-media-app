@@ -93,9 +93,9 @@ function Modal() {
                  overflow-hidden shadow-xl transform transition-all sm:my-8 mt-20 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
                              <form>
                                  {selectedFile?( <img src={selectedFile} alt="uploaded post" onClick={()=>setSelectedFile(null)}/> ):(<div  onClick={()=>filePicker.current.click()}
-                                 className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 cursor-pointer">
+                                 className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 cursor-pointer">
 
-                                     <CameraIcon  className="h-6 w-6 text-red-600" aria-hidden="true" />
+                                     <CameraIcon  className="h-6 w-6 text-blue-500" aria-hidden="true" />
                                  </div>)
 
                                  }
@@ -130,8 +130,8 @@ function Modal() {
 
                                <button onClick={uploadPost} type="button" 
                                className="inline-flex justify-center w-full rounded-md border border-transparent
-                               shadow-sm px-4 py-2 bg-red-500 text-base font-medium text-white hover:bg-red-700
-                               focus:outline-none focus:rounded-full focus:ring-offset-2 focus:ring-red-500 sm:text-sm
+                               shadow-sm px-4 py-2 bg-yellow-600 text-base font-medium text-white hover:bg-yellow-600
+                               focus:outline-none focus:rounded-full focus:ring-offset-2 focus:ring-yellow-500 sm:text-sm
                                disabled:bg-gray-300 disabled:cursor-not-allowed disabled:hover:bg-gray-300">
 
                               {loading? "Uploading ...":"Upload Post"}

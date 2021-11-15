@@ -4,8 +4,6 @@ import {
   
   HeartIcon,
   PaperAirplaneIcon,
- 
-  DotsHorizontalIcon,
   ChatIcon,
   BookmarkIcon,
   EmojiHappyIcon
@@ -18,6 +16,7 @@ import { db } from '../firebase';
 import Moment from 'react-moment';
 import 'moment-timezone';
 import PostMenu from './PostMenu';
+import Footer from './Footer';
 
 function Post ({ id, username, userImg, img, caption }) {
 const {data:session} =useSession();
@@ -156,7 +155,7 @@ else{
   </div>))
 }
 
-
+<Footer/>
   </div>
 
 )}

@@ -1,4 +1,5 @@
 import { getProviders, signIn} from 'next-auth/react'
+import Footer from '../../components/Footer'
 
 import Header from '../../components/Header'
 const prefix = process.env.NEXT_PUBLIC_BASE_PATH || ''
@@ -20,6 +21,7 @@ export default function SignIn ({ providers }) {
         </div>
       ))}</div>
       </div>
+      <Footer/>
     </>
   )
 }

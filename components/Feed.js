@@ -2,7 +2,8 @@ import Stories from './Stories'
 import Posts from './Posts'
 import Profile from './Profile'
 import Suggestions from './Suggestions'
-import {signOut,useSession} from 'next-auth/react'
+import {useSession} from 'next-auth/react'
+
 
 function Feed () {
   const {data: session} = useSession();
@@ -16,7 +17,7 @@ function Feed () {
         <Stories />
         {/* Posts */}
         <Posts />
-
+     
       </section>
       {session && ( <section className='hidden xl:inline-grid col-span-1'>
         {/* Profile */}
@@ -27,6 +28,7 @@ function Feed () {
           <Suggestions />
 
         </div>
+     
 
       </section>)}
       {/* Section Right */}

@@ -7,7 +7,7 @@ import {
   UserGroupIcon,
   HeartIcon,
   PaperAirplaneIcon,
- PlusSmIcon
+
  
 
 } from '@heroicons/react/outline'
@@ -69,8 +69,8 @@ const [open,setOpen]=useRecoilState(modalState);
            * 
            *   <PlusCircleIcon onClick={()=>setOpen(true)} className='navBtn' />
            * 
-           */
-
+           */ 
+            
            
           }
          
@@ -78,7 +78,7 @@ const [open,setOpen]=useRecoilState(modalState);
         
           <UserGroupIcon className='navBtn' />
           <HeartIcon className='navBtn' />
-          <MainMenu/>
+          
           
           <img
             
@@ -91,7 +91,7 @@ const [open,setOpen]=useRecoilState(modalState);
             
   }
   
-        </div>
+        </div>        
 
       </div>
     </div>
